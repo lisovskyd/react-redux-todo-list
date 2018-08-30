@@ -1,13 +1,6 @@
 import { setTodosToLocalStorage, getTodosFromLocalStorage } from '../helpers/';
-
-export const tasksType = {
-  LOAD_STORAGE_TO_STORE: 'LOAD_STORAGE_TO_STORE',
-  ADD_COMMENT: 'ADD_COMMENT',
-  CREATE_TASK: 'CREATE_TASK',
-  CHANGE_VALUE: 'CHANGE_VALUE',  
-  DELETE_TASK: 'DELETE_TASK',
-  CHANGE_COMPLETE_VALUE: 'CHANGE_COMPLETE_VALUE'
-};
+import * as tasksType  from '../constants/actionTypes';
+import uuid from 'uuid'
 
 export const saveStateToStorage = () => {
   return ({
@@ -33,7 +26,6 @@ export const getComments = () => (dispatch, getState) => {
 export const createTask = () => (dispatch, getState) => {
   const { inputValue } = getState();  
   if (!inputValue) return;
-  const uuid = require('uuid/v4');
   dispatch({
     type: tasksType.CREATE_TASK,    
     id: uuid(),

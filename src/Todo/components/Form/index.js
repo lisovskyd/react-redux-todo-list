@@ -8,7 +8,6 @@ class Form extends Component {
       <div className="Form">
         <form onSubmit={(event) => {
           this.props.handleSubmit(event)
-          this.props.saveStateToStorage()
         }}>
           <span className="appTitle">Todo list</span>
           <input
@@ -19,8 +18,8 @@ class Form extends Component {
         </form>
       </div>
     )
-  }
-}
+  };
+};
 
 const mapStateToProps = (state) => {
   return ({

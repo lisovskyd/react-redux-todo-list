@@ -26,8 +26,7 @@ class Main extends Component {
       <div className="App">
         <Form
           handleChange={this.handleChange} 
-          handleSubmit={this.handleSubmit}
-          saveStateToStorage={this.props.saveStateToStorage} 
+          handleSubmit={this.handleSubmit} 
         />
         <List
           changeCompleteValue={this.props.changeCompleteValue} 
@@ -41,11 +40,6 @@ class Main extends Component {
   };
 }
 
-const mapStateToProps = (state) => {
-  return ({
-    store: state
-  })
-};
 const mapDispatchToProps = { createTask, changeValue, deleteTask, changeCompleteValue, getComments, saveStateToStorage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(null, mapDispatchToProps)(Main);

@@ -5,7 +5,7 @@ export default class Task extends Component {
     
     return (
       <div className="Task">
-        <span className="taskWrapper" style={{textDecoration: this.props.todo.done ? 'line-through' : 'none'}}>
+        <span className={this.props.todo.done ? 'taskWrapper taskDecoration' : 'taskWrapper'}>
           <button className="deleteTask" onClick={(event) => this.props.deleteTask(event)}></button>
           {this.props.todo.value}
         </span>

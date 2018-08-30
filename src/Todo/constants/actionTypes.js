@@ -1,0 +1,7 @@
+
+  export const LOAD_STORAGE_TO_STORE = 'LOAD_STORAGE_TO_STORE';
+  export const ADD_COMMENT = 'ADD_COMMENT';
+  export const CREATE_TASK = 'CREATE_TASK';
+  export const CHANGE_VALUE = 'CHANGE_VALUE';  
+  export const DELETE_TASK = 'DELETE_TASK';
+  export const CHANGE_COMPLETE_VALUE = 'CHANGE_COMPLETE_VALUE';

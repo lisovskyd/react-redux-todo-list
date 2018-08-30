@@ -47,6 +47,10 @@
     margin-right: 5px;
 }
 
+.taskDecoration {
+    text-decoration: line-through;
+}
+
 .deleteTask {
     position: absolute;
     background-color: #fff;

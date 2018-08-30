@@ -1,4 +1,4 @@
-import { tasksType } from '../actions/';
+import * as tasksType  from '../constants/actionTypes';
 
 const initialState = {
   comments: [],
@@ -37,15 +37,14 @@ export default function TodoListReducer(state = initialState, action) {
       return newState;
 
     case tasksType.CHANGE_COMPLETE_VALUE:
-      let valueNewState = {...state};
-      valueNewState.todos = [...valueNewState.todos];
-      valueNewState.todos.forEach((elem)=> {
-        if(elem.id === action.id) {
-          elem.done = !elem.done
-        }
-      });
-      ;  
-      return valueNewState;  
+ 
+      return {...state, todos: state.todos.map((todo) => {
+          if (todo.id === action.id) {
+            return {...todo, done: !todo.done}
+          } 
+          return todo;
+        })
+      }  
 
     default: 
       return state
