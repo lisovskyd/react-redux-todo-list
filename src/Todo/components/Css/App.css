@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    position: relative;
+    display: inline-block;
+    margin-left: 50px;
+    min-width: 280px;
+    margin: 0 auto;
+    border: 2px solid lightgray;
+    padding: 15px;
+    top: 50px;   
+    left: 50%;
+    transform: translate(-50%, 0);    
+}
+
+.appTitle {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.Form {
+    margin: 0 0 10px 0;
+}
+
+.Form input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.Task {    
+    margin: 0 0 20px 0;
+}
+
+.Task button {
+    float: right;
+    height: 100%;
+}
+
+.taskWrapper {
+    position: relative;    
+    padding-left: 20px;
+    margin-right: 5px;
+}
+
+.deleteTask {
+    position: absolute;
+    background-color: #fff;
+    border: none;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    cursor: pointer;      
+}
+
+.deleteTask::before,
+.deleteTask::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 8px;       
+    height: 12px;
+    width: 1px;
+    background-color: #282c37;
+}
+
+.deleteTask:hover::before,
+.deleteTask:hover::after {
+    background-color: #ff0000
+}
+
+.deleteTask:before {
+    transform: rotate(45deg);
+}
+
+.deleteTask:after {
+    transform: rotate(-45deg);
+}
+
+.comments-title {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.comments-list {
+    border: 1px solid lightgray;
+    margin-bottom: 20px;
+    min-height: 100px;
+    padding: 20px;
+    max-width: 310px;
+    list-style: none;
+    text-align: justify;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
