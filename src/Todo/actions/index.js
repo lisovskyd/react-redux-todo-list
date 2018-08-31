@@ -2,6 +2,12 @@ import { setTodosToLocalStorage, getTodosFromLocalStorage } from '../helpers/';
 import * as tasksType  from '../constants/actionTypes';
 import uuid from 'uuid'
 
+// export const setSelected = (event) => (dispatch, getState) => {
+//   return ({
+//     type: tasksType.SET_SELECTED
+//   })
+// }
+
 export const saveStateToStorage = () => {
   return ({
     type: tasksType.LOAD_STORAGE_TO_STORE,
@@ -29,7 +35,8 @@ export const createTask = () => (dispatch, getState) => {
   dispatch({
     type: tasksType.CREATE_TASK,    
     id: uuid(),
-    done: false      
+    done: false,
+    complited: 'todo'      
   })
   setTodosToLocalStorage('Tasks', getState());
 };
@@ -49,10 +56,12 @@ export const deleteTask = (todosId) => (dispatch, getState) => {
   setTodosToLocalStorage('Tasks', getState());
 };
 
-export const changeCompleteValue = (todosId) => (dispatch, getState) => {
+export const changeCompleteValue = (todosId, event) => (dispatch, getState) => {
+  const target = event.target;
   dispatch ({
     type: tasksType.CHANGE_COMPLETE_VALUE,
-    id: todosId
+    id: todosId,
+    value: target.value
   });
   setTodosToLocalStorage('Tasks', getState());
 };

@@ -13,15 +13,16 @@ export default function TodoListReducer(state = initialState, action) {
       return { ...state, ...action.payload }; 
 
     case tasksType.ADD_COMMENT:
-      return { ...state , comments: [ ...state.comments, action.payload.body]}
+      return { ...state , comments: [ ...state.comments, action.payload.body] }
 
     case tasksType.CREATE_TASK:
       const newTodo = {
         id: action.id,
         value: state.inputValue,
-        done: action.done
+        done: action.done,
+        complited: action.complited
       }
-      const convertState = {...state, todos: [ newTodo, ...state.todos ], inputValue: ''};       
+      const convertState = { ...state, todos: [ newTodo, ...state.todos ], inputValue: '' };       
       return convertState;
 
     case tasksType.CHANGE_VALUE:
@@ -36,11 +37,11 @@ export default function TodoListReducer(state = initialState, action) {
       });
       return newState;
 
-    case tasksType.CHANGE_COMPLETE_VALUE:
- 
+    case tasksType.CHANGE_COMPLETE_VALUE:  
+
       return {...state, todos: state.todos.map((todo) => {
           if (todo.id === action.id) {
-            return {...todo, done: !todo.done}
+            return {...todo, complited: action.value}
           } 
           return todo;
         })
