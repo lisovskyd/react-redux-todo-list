@@ -7,8 +7,6 @@ import Form from '../Form/';
 import Comments from '../Comments/';
 import { saveStateToStorage } from '../../actions/';
 
-import Test from '../Test/';
-
 const history = createBrowserHistory();
 
 class Main extends Component {
@@ -37,7 +35,6 @@ class Main extends Component {
           </ul>
           <Route exact path='/' component={Form} />
           <Route exact path='/Comments' component={Comments} />
-          <Route exact path='/Test' component={Test} />
         </div>  
       </Router>   
     )

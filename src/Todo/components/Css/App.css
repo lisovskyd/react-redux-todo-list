@@ -72,6 +72,7 @@
 .Task {    
     margin: 0 0 20px 0;
     border: 1px solid lightslategray;
+    box-sizing: content-box !important;
 }
 
 .Task:last-child {
@@ -153,26 +154,3 @@
 
 /* TEST */
 
-.Test {
-    width: 300px;
-    min-height: 200px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.testList {
-    border: 2px solid black;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    min-width: 115px;
-    padding: 5px;
-}
-
-.testList li {
-    list-style: none;
-    border: 1px solid black;
-    padding: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}

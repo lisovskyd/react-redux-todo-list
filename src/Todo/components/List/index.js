@@ -9,7 +9,7 @@ class List extends Component {
 
   getListStyle = () => ({
     padding: 8,
-    width: 250
+    width: 250,
   });
 
   render() {
@@ -24,13 +24,23 @@ class List extends Component {
     })
     return (
       <DragDropContext onDragEnd={this.props.onDragEnd}>
-        <div className="listWrapper">        
-          <div className="List">
-            <span className="listTitle">Test</span>
-            { renderTodo('test') }
-          </div>        
+        <div className="listWrapper">
           <Droppable 
-            droppableId="droppable" 
+              droppableId="test" 
+            > 
+            {(provided, snapshot) => (
+              <div className="List"
+                ref={provided.innerRef}                
+                style={this.getListStyle()}
+              >
+                <span className="listTitle">Test</span>
+                { renderTodo('test') }
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <Droppable 
+            droppableId="todo" 
           > 
             {(provided, snapshot) => (
               <div className="List"
@@ -39,18 +49,38 @@ class List extends Component {
               >
                 <span className="listTitle">Todo</span>
                 { renderTodo('todo') }
-                {provided.placeholder}
+                {provided.placeholder}                
               </div>
             )}            
           </Droppable>
-          <div className="List inProgress">
-            <span className="listTitle">In progress</span> 
-            { renderTodo('in progress') }
-          </div>      
-          <div className="List Done">
-            <span className="listTitle">Done</span>  
-            { renderTodo('done') }
-          </div>
+          <Droppable
+            droppableId="in progress" 
+          >
+            {(provided, snapshot) => (
+              <div className="List"
+                ref={provided.innerRef}                
+                style={this.getListStyle()}
+              >
+                <span className="listTitle">In progress</span> 
+                { renderTodo('in progress') }
+                {provided.placeholder}
+              </div>
+            )} 
+          </Droppable>
+          <Droppable
+            droppableId="done" 
+          >
+            {(provided, snapshot) => (
+              <div className="List"
+                ref={provided.innerRef}                
+                style={this.getListStyle()}
+              >
+                <span className="listTitle">Done</span>  
+                { renderTodo('done') }
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>        
       </DragDropContext>    
     )

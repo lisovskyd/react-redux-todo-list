@@ -13,15 +13,24 @@ export const onDragEnd = (result) => (dispatch, getState) => {
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
-  };  
-  const items = reorder(
-    getState().todos,
+  };
+
+  const initTodosState = [ ...getState().todos ];
+  initTodosState.forEach((todo)=> {
+    if(result.draggableId === todo.id) {
+      todo.complited = result.destination.droppableId;
+    }
+  })
+  
+  const todos = reorder(
+    initTodosState,
     result.source.index,
     result.destination.index    
   );  
+
   return dispatch({
     type: tasksType.ON_DRAG_END,
-    updatedTodos: items
+    updatedTodos: todos
   })
 }
 
