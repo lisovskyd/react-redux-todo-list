@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Draggable } from 'react-beautiful-dnd';
 
-export default class Task extends Component {
+import { deleteTask, changeCompleteValue } from '../../actions/';
+
+class Task extends Component {
   
-  render() {  
+  
+  render() {
     return (
-      <div className="Task">
-        <span className={this.props.todo.done ? 'taskWrapper taskDecoration' : 'taskWrapper'}>
-          <button className="deleteTask" onClick={(event) => this.props.deleteTask(event)}></button>
-          {this.props.todo.value}
-        </span>
-        <select className="todoStatus" onChange={(event) => this.props.changeCompleteValue(this.props.todo.id, event)}>
-          <option selected={this.props.todo.complited === 'test'}>test</option>
-          <option selected={this.props.todo.complited === 'todo'}>todo</option>
-          <option selected={this.props.todo.complited === 'in progress'}>in progress</option>
-          <option selected={this.props.todo.complited === 'done'}>done</option>
-        </select>
-      </div>
+      <Draggable draggableId={this.props.todo.id} key={this.props.todo.id} index={this.props.index}>
+        {(provided, snapshot) => (
+          <div className="Task"
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <span className={this.props.todo.done ? 'taskWrapper taskDecoration' : 'taskWrapper'}>
+              <button className="deleteTask" onClick={() => this.props.deleteTask(this.props.todo.id)}></button>
+              {this.props.todo.value}
+            </span>
+            <select value={this.props.todo.complited} className="todoStatus" onChange={(event) => this.props.changeCompleteValue(this.props.todo.id, event)}>
+              <option>test</option>
+              <option>todo</option>
+              <option>in progress</option>
+              <option>done</option>
+            </select>
+          </div>
+        )}          
+      </Draggable>
     )
   };
 };
+
+const mapDispatchToProps = {
+  deleteTask, 
+  changeCompleteValue
+};
+
+export default connect(null, mapDispatchToProps)(Task);

@@ -1,12 +1,29 @@
 import { setTodosToLocalStorage, getTodosFromLocalStorage } from '../helpers/';
 import * as tasksType  from '../constants/actionTypes';
-import uuid from 'uuid'
+import uuid from 'uuid';
 
-// export const setSelected = (event) => (dispatch, getState) => {
-//   return ({
-//     type: tasksType.SET_SELECTED
-//   })
-// }
+export const onDragEnd = (result) => (dispatch, getState) => {
+
+  if (!result.destination) {
+      return;
+    }
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };  
+  const items = reorder(
+    getState().todos,
+    result.source.index,
+    result.destination.index    
+  );  
+  return dispatch({
+    type: tasksType.ON_DRAG_END,
+    updatedTodos: items
+  })
+}
 
 export const saveStateToStorage = () => {
   return ({

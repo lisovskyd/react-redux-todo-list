@@ -15,6 +15,16 @@
     transform: translate(-50%, 0);    
 }
 
+.bookmarksWrapper {
+    margin: 0;
+    padding: 0;
+}
+
+.bookmarks {
+    display: inline-block;
+    margin-right: 20px;
+}
+
 .appTitle {
     display: block;
     text-align: center;
@@ -139,4 +149,30 @@
 .buttons-wrapper {
     display: flex;
     justify-content: space-between;
+}
+
+/* TEST */
+
+.Test {
+    width: 300px;
+    min-height: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.testList {
+    border: 2px solid black;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-width: 115px;
+    padding: 5px;
+}
+
+.testList li {
+    list-style: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }

@@ -14,7 +14,7 @@ const store = createStore(TodoListReducer, composeWithDevTools(applyMiddleware(t
 
 ReactDOM.render(
   <Provider store={store}>
-      <App storeObj={store}/>
+      <App storeObj={store} />
   </Provider>, 
   document.getElementById('root')
 );

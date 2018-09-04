@@ -9,6 +9,9 @@ const initialState = {
 export default function TodoListReducer(state = initialState, action) {
   switch (action.type) {
 
+    case tasksType.ON_DRAG_END:
+      return { ...state, todos: [ ...action.updatedTodos ] }
+
     case tasksType.LOAD_STORAGE_TO_STORE: 
       return { ...state, ...action.payload }; 
 
