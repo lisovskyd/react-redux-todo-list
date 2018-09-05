@@ -17,7 +17,7 @@ export const onDragEnd = (result) => (dispatch, getState) => {
 
   const initTodosState = getState().todos.map((todo) => {
     if(result.draggableId === todo.id) {
-      todo.complited = result.destination.droppableId;
+      todo.taskStatus = result.destination.droppableId;
     }
     return todo;
   })
@@ -43,18 +43,11 @@ export const saveStateToStorage = () => {
   })
 };
 
-export const getComments = () => (dispatch, getState) => {
-  fetch(`https://jsonplaceholder.typicode.com/comments/1`)
-  .then(response => {
-    const data = response.json();
-    return data
-  }) 
-  .then(data => 
-    dispatch({
-      type: tasksType.ADD_COMMENT,
-      payload: data
-    })
-  )
+export const getComments = (payload) => {
+  return ({
+    type: tasksType.ADD_COMMENT,
+    payload
+  })
 };
 
 export const createTask = () => (dispatch, getState) => {
@@ -63,17 +56,16 @@ export const createTask = () => (dispatch, getState) => {
   dispatch({
     type: tasksType.CREATE_TASK,    
     id: uuid(),
-    done: false,
-    complited: 'todo'      
+    taskStatus: 'todo'      
   })
   setTodosToLocalStorage('Tasks', getState());
 };
 
 export const changeValue = (inputValue) => {
-  return {
+  return ({
     type: tasksType.CHANGE_VALUE,
     inputValue
-  }
+  })
 };
 
 export const deleteTask = (todosId) => (dispatch, getState) => {

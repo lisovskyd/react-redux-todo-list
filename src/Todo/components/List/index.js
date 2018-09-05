@@ -12,29 +12,30 @@ class List extends Component {
     width: 250,
   });
 
+  renderTodo = (complitedValue) => this.props.store.map((todo, index) => {
+    return todo.taskStatus === `${complitedValue}` ? (
+      <Task 
+        key={todo.id}
+        todo={todo}
+        index={index}
+      />           
+    ) : null
+  })
+
   render() {
-    const renderTodo = (complitedValue) => this.props.store.map((todo, index) => {
-      return todo.complited === `${complitedValue}` ? (
-        <Task 
-          key={todo.id}
-          todo={todo}
-          index={index}
-        />           
-      ) : null
-    })
     return (
       <DragDropContext onDragEnd={this.props.onDragEnd}>
-        <div className="listWrapper">
+        <div className="list-wrapper">
           <Droppable 
               droppableId="test" 
             > 
             {(provided, snapshot) => (
-              <div className="List"
+              <div className="list"
                 ref={provided.innerRef}                
                 style={this.getListStyle()}
               >
-                <span className="listTitle">Test</span>
-                { renderTodo('test') }
+                <span className="list-title">Test</span>
+                { this.renderTodo('test') }
                 {provided.placeholder}
               </div>
             )}
@@ -43,12 +44,12 @@ class List extends Component {
             droppableId="todo" 
           > 
             {(provided, snapshot) => (
-              <div className="List"
+              <div className="list"
                 ref={provided.innerRef}                
                 style={this.getListStyle()}
               >
-                <span className="listTitle">Todo</span>
-                { renderTodo('todo') }
+                <span className="list-title">Todo</span>
+                { this.renderTodo('todo') }
                 {provided.placeholder}                
               </div>
             )}            
@@ -57,12 +58,12 @@ class List extends Component {
             droppableId="in progress" 
           >
             {(provided, snapshot) => (
-              <div className="List"
+              <div className="list"
                 ref={provided.innerRef}                
                 style={this.getListStyle()}
               >
-                <span className="listTitle">In progress</span> 
-                { renderTodo('in progress') }
+                <span className="list-title">In progress</span> 
+                { this.renderTodo('in progress') }
                 {provided.placeholder}
               </div>
             )} 
@@ -71,12 +72,12 @@ class List extends Component {
             droppableId="done" 
           >
             {(provided, snapshot) => (
-              <div className="List"
+              <div className="list"
                 ref={provided.innerRef}                
                 style={this.getListStyle()}
               >
-                <span className="listTitle">Done</span>  
-                { renderTodo('done') }
+                <span className="list-title">Done</span>  
+                { this.renderTodo('done') }
                 {provided.placeholder}
               </div>
             )}

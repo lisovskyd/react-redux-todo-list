@@ -11,12 +11,16 @@ class Task extends Component {
     border: isDragging ? '3px solid lightslategray' : draggableStyle.border,
     ...draggableStyle
   });
+  
+  deleteTask = () => this.props.deleteTask(this.props.todo.id);
+
+  changeCompleteValue = (event) => this.props.changeCompleteValue(this.props.todo.id, event);
 
   render() {
     return (
-      <Draggable draggableId={this.props.todo.id} key={this.props.todo.id} index={this.props.index}>
+      <Draggable draggableId={this.props.todo.id} index={this.props.index}>
         {(provided, snapshot) => (
-          <div className="Task"
+          <div className="task"
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
@@ -24,11 +28,11 @@ class Task extends Component {
               snapshot.isDragging,
               provided.draggableProps.style)}
           >
-            <span className={this.props.todo.done ? 'taskWrapper taskDecoration' : 'taskWrapper'}>
-              <button className="deleteTask" onClick={() => this.props.deleteTask(this.props.todo.id)}></button>
+            <span className={this.props.todo.done ? 'task-wrapper task-decoration' : 'task-wrapper'}>
+              <button className="delete-task" onClick={ this.deleteTask }></button>
               {this.props.todo.value}
             </span>
-            <select value={this.props.todo.complited} className="todoStatus" onChange={(event) => this.props.changeCompleteValue(this.props.todo.id, event)}>
+            <select value={this.props.todo.taskStatus} className="todo-status" onChange={ this.changeCompleteValue }>
               <option>test</option>
               <option>todo</option>
               <option>in progress</option>

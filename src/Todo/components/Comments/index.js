@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import uuid from 'uuid';
 import { getComments } from '../../actions/';
 
-class Comments extends Component { 
+const showLi = (elem, index) => <li key={index}>{elem}</li>;
+
+class Comments extends Component {
+  
+  getComments = () => this.props.getComments;
   
   render() {
     return (
@@ -12,14 +15,12 @@ class Comments extends Component {
         <span className="comments-title">Comments</span>
         <ul className="comments-list">
           
-          {this.props.store.map((elem) => {
-            return (<li key={uuid()}>{elem}</li>)
-          })}          
+          {this.props.store.map( showLi )}          
         </ul>       
         <div className="buttons-wrapper">        
-          <button className="commentsButtons" onClick={this.props.getComments}>Start</button>
-          <button className="commentsButtons">Pause</button>
-          <button className="commentsButtons">Clear</button>
+          <button className="" onClick={this.getComments}>Start</button>
+          <button className="">Pause</button>
+          <button className="">Clear</button>
         </div>
       </div>
     )

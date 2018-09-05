@@ -16,13 +16,13 @@ class Main extends Component {
       this.props.saveStateToStorage()
     };    
   };
-  
+
   render() {
 
     return (   
       <Router history={history}>
-        <div className="App">
-          <ul className="bookmarksWrapper">
+        <div className="app">
+          <ul className="bookmarks-wrapper">
             <li className="bookmarks">
               <Link to='/'>Todo Application</Link>
             </li>

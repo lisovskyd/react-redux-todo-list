@@ -4,17 +4,26 @@ import { createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import './Todo/components/Css/App.css';
 
 import App from './Todo/components/App/';
 import TodoListReducer from './Todo/reducers/';
+import commentsRequest from './Todo/saga/';
 
-const store = createStore(TodoListReducer, composeWithDevTools(applyMiddleware(thunk)));
+const sagaMiddleware  = createSagaMiddleware()
+
+const store = createStore(
+  TodoListReducer, 
+  composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
+);
+
+// sagaMiddleware.run(commentsRequest)
 
 ReactDOM.render(
   <Provider store={store}>
-      <App storeObj={store} />
+      <App />
   </Provider>, 
   document.getElementById('root')
 );

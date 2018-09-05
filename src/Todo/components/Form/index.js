@@ -6,8 +6,7 @@ import { createTask, changeValue } from '../../actions/';
 
 class Form extends Component {
 
-  handleChange = ({ target: {value} }) => {
-    return this.props.changeValue(value)}; 
+  handleChange = ({ target: {value} }) => this.props.changeValue(value);
 
   handleSubmit = (event) => {    
     event.preventDefault();
@@ -16,15 +15,12 @@ class Form extends Component {
 
   render() {
     return (
-      <div className="Form">
-        <form onSubmit={(event) => {
-          this.handleSubmit(event)
-        }}>
-          <span className="appTitle">Todo list</span>
+      <div className="form">
+        <form onSubmit={this.handleSubmit}>
+          <span className="app-title">Todo list</span>
           <input
-            onChange={(event) =>
-              this.handleChange(event)}
-            value={this.props.store}
+            onChange={this.handleChange}
+            value={this.props.inputValue}
           />
         </form>
         <List
@@ -43,7 +39,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return ({
-    store: state.inputValue
+    inputValue: state.inputValue
   })
 };
 

@@ -23,11 +23,9 @@ export default function TodoListReducer(state = initialState, action) {
       const newTodo = {
         id: action.id,
         value: state.inputValue,
-        done: action.done,
-        complited: action.complited
-      }
-      const convertState = { ...state, todos: [ newTodo, ...state.todos ], inputValue: '' };       
-      return convertState;
+        taskStatus: action.taskStatus
+      }      
+      return { ...state, todos: [ newTodo, ...state.todos ], inputValue: '' };
 
     case tasksType.CHANGE_VALUE:
       return {...state, 
@@ -45,7 +43,7 @@ export default function TodoListReducer(state = initialState, action) {
 
       return {...state, todos: state.todos.map((todo) => {
           if (todo.id === action.id) {
-            return {...todo, complited: action.value}
+            return {...todo, taskStatus: action.value}
           } 
           return todo;
         })
