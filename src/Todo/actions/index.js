@@ -9,17 +9,17 @@ export const onDragEnd = (result) => (dispatch, getState) => {
     }
 
   const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
+    const result = [ ...list];
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
   };
 
-  const initTodosState = [ ...getState().todos ];
-  initTodosState.forEach((todo)=> {
+  const initTodosState = getState().todos.map((todo) => {
     if(result.draggableId === todo.id) {
       todo.complited = result.destination.droppableId;
     }
+    return todo;
   })
   
   const todos = reorder(
@@ -28,10 +28,12 @@ export const onDragEnd = (result) => (dispatch, getState) => {
     result.destination.index    
   );  
 
-  return dispatch({
+  dispatch({
     type: tasksType.ON_DRAG_END,
     updatedTodos: todos
   })
+
+  setTodosToLocalStorage('Tasks', getState());
 }
 
 export const saveStateToStorage = () => {
