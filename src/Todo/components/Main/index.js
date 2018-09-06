@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router-dom';
 import createBrowserHistory from  'history/createBrowserHistory';
+import { connect } from 'react-redux';
 
 import Form from '../Form/';
 import Comments from '../Comments/';
-import { saveStateToStorage } from '../../actions/';
+import { getTasksFromLocalStorage } from '../../../actions/';
 
 const history = createBrowserHistory();
 
@@ -13,7 +13,7 @@ class Main extends Component {
   
   componentDidMount = () => {
     if(localStorage.getItem(`Tasks`) !== null) {
-      this.props.saveStateToStorage()
+      this.props.getTasksFromLocalStorage()
     };    
   };
 
@@ -42,7 +42,7 @@ class Main extends Component {
 }
 
 const mapDispatchToProps = {
-  saveStateToStorage
+  getTasksFromLocalStorage
 };
 
 export default connect(null, mapDispatchToProps)(Main);

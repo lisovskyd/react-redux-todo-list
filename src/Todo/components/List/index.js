@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Task from '../Task/';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { onDragEnd } from '../../actions/';
+import { onDragEnd } from '../../../actions/';
 
 class List extends Component {
 

@@ -1,4 +1,4 @@
-import * as tasksType  from '../constants/actionTypes';
+import * as tasksType  from '../variables/actionTypes';
 
 const initialState = {
   comments: [],
@@ -13,7 +13,7 @@ export default function TodoListReducer(state = initialState, action) {
       let initNewState = { ...state, todos: [ ...action.updatedTodos ] };
       return initNewState;
 
-    case tasksType.LOAD_STORAGE_TO_STORE: 
+    case tasksType.SET_TASKS_FROM_LOCALSTORAGE_TO_STORE: 
       return { ...state, ...action.payload }; 
 
     case tasksType.ADD_COMMENT:
@@ -35,7 +35,7 @@ export default function TodoListReducer(state = initialState, action) {
     case tasksType.DELETE_TASK:
       let newState = {...state};
       newState.todos = state.todos.filter((item) => {
-        return item.id !== action.id       
+        return item.id !== action.todosId       
       });
       return newState;
 

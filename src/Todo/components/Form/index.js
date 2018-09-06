@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import List from '../List/';
-import { createTask, changeValue } from '../../actions/';
+import { requestCreateTask, changeValue } from '../../../actions/';
 
 class Form extends Component {
 
@@ -10,7 +10,7 @@ class Form extends Component {
 
   handleSubmit = (event) => {    
     event.preventDefault();
-    this.props.createTask();
+    this.props.requestCreateTask();
   };
 
   render() {
@@ -33,7 +33,7 @@ class Form extends Component {
 };
 
 const mapDispatchToProps = {
-  createTask, 
+  requestCreateTask, 
   changeValue
 };
 

@@ -9,8 +9,8 @@ import createSagaMiddleware from 'redux-saga';
 import './Todo/components/Css/App.css';
 
 import App from './Todo/components/App/';
-import TodoListReducer from './Todo/reducers/';
-import commentsRequest from './Todo/saga/';
+import TodoListReducer from './reducers/';
+import rootSaga from './sagas/';
 
 const sagaMiddleware  = createSagaMiddleware()
 
@@ -19,7 +19,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
 );
 
-// sagaMiddleware.run(commentsRequest)
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

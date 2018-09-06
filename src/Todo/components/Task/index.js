@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { deleteTask, changeCompleteValue } from '../../actions/';
+import { deleteTask, changeCompleteValue } from '../../../actions/';
 
 class Task extends Component {
   

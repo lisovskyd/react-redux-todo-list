@@ -1,5 +1,5 @@
-import { setTodosToLocalStorage, getTodosFromLocalStorage } from '../helpers/';
-import * as tasksType  from '../constants/actionTypes';
+import { setTodosToLocalStorage } from '../helpers/';
+import * as tasksType  from '../variables/actionTypes';
 import uuid from 'uuid';
 
 export const onDragEnd = (result) => (dispatch, getState) => {
@@ -36,10 +36,16 @@ export const onDragEnd = (result) => (dispatch, getState) => {
   setTodosToLocalStorage('Tasks', getState());
 }
 
-export const saveStateToStorage = () => {
+export const getTasksFromLocalStorage = () => {
   return ({
-    type: tasksType.LOAD_STORAGE_TO_STORE,
-    payload: getTodosFromLocalStorage('Tasks')    
+    type: tasksType.GET_TASKS_FROM_LOCALSTORAGE
+  })
+}
+
+export const setTasksFromLocalStorageToStore = (payload) => {
+  return ({
+    type: tasksType.SET_TASKS_FROM_LOCALSTORAGE_TO_STORE,
+    payload    
   })
 };
 
@@ -50,15 +56,30 @@ export const getComments = (payload) => {
   })
 };
 
-export const createTask = () => (dispatch, getState) => {
-  const { inputValue } = getState();  
-  if (!inputValue) return;
-  dispatch({
+export const stopAddComments = () => {
+  return ({
+    type: tasksType.STOP_ADD_COMMENTS
+  })
+}
+
+export const commentRequest = () => {
+  return ({
+    type: tasksType.REQUEST_COMMENT
+  })
+};
+
+export const requestCreateTask = () => {
+  return ({
+    type: tasksType.REQUEST_CREATE_TASK
+  })
+}
+
+export const createTask = () => {
+  return ({
     type: tasksType.CREATE_TASK,    
     id: uuid(),
     taskStatus: 'todo'      
   })
-  setTodosToLocalStorage('Tasks', getState());
 };
 
 export const changeValue = (inputValue) => {
@@ -68,20 +89,18 @@ export const changeValue = (inputValue) => {
   })
 };
 
-export const deleteTask = (todosId) => (dispatch, getState) => {
-  dispatch ({
+export const deleteTask = (todosId) => {
+  return ({
     type: tasksType.DELETE_TASK,
-    id: todosId
+    todosId: todosId
   })
-  setTodosToLocalStorage('Tasks', getState());
 };
 
-export const changeCompleteValue = (todosId, event) => (dispatch, getState) => {
+export const changeCompleteValue = (todosId, event) => {
   const target = event.target;
-  dispatch ({
+  return ({
     type: tasksType.CHANGE_COMPLETE_VALUE,
     id: todosId,
     value: target.value
   });
-  setTodosToLocalStorage('Tasks', getState());
 };

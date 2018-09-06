@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getComments } from '../../actions/';
+import { commentRequest, stopAddComments } from '../../../actions/';
 
 const showLi = (elem, index) => <li key={index}>{elem}</li>;
 
+
 class Comments extends Component {
-  
-  getComments = () => this.props.getComments;
+
+  // getComments = () => console.log(this.props.getComments);
+  // doesn't work
   
   render() {
     return (
       <div className="comments-wrapper">
         <span className="comments-title">Comments</span>
-        <ul className="comments-list">
-          
+        <ul className="comments-list">          
           {this.props.store.map( showLi )}          
         </ul>       
         <div className="buttons-wrapper">        
-          <button className="" onClick={this.getComments}>Start</button>
-          <button className="">Pause</button>
+          <button className="" onClick={ this.props.commentRequest }>Start</button>
+          <button className="" onClick={ this.props.stopAddComments }>Stop</button>
           <button className="">Clear</button>
         </div>
       </div>
@@ -34,7 +35,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = { 
-  getComments
+  commentRequest,
+  stopAddComments
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);
