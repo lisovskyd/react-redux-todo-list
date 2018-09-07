@@ -1,5 +1,5 @@
-
 // Drag & drop variables
+export const WATCH_FOR_DRAG_END = 'WATCH_FOR_DRAG_END';
 export const ON_DRAG_END = 'ON_DRAG_END';
 
 // variables of interaction store & LocalStorage 

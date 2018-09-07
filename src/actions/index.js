@@ -1,39 +1,18 @@
-import { setTodosToLocalStorage } from '../helpers/';
 import * as tasksType  from '../variables/actionTypes';
 import uuid from 'uuid';
 
-export const onDragEnd = (result) => (dispatch, getState) => {
-
-  if (!result.destination) {
-      return;
-    }
-
-  const reorder = (list, startIndex, endIndex) => {
-    const result = [ ...list];
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-  };
-
-  const initTodosState = getState().todos.map((todo) => {
-    if(result.draggableId === todo.id) {
-      todo.taskStatus = result.destination.droppableId;
-    }
-    return todo;
+export const watchForDragEnd = (payload) => {
+  return({
+    type: tasksType.WATCH_FOR_DRAG_END,
+    payload
   })
-  
-  const todos = reorder(
-    initTodosState,
-    result.source.index,
-    result.destination.index    
-  );  
+};
 
-  dispatch({
+export const onDragEnd = (todos) => {
+  return({
     type: tasksType.ON_DRAG_END,
     updatedTodos: todos
   })
-
-  setTodosToLocalStorage('Tasks', getState());
 }
 
 export const getTasksFromLocalStorage = () => {

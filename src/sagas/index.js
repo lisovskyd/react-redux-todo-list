@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 import watchLoadComments from './Comments/';
-import { watchAddTask, watchDeleteTask, watchtChangeCompleteValue } from './Todos/';
+import { watchAddTask, watchDeleteTask, watchtChangeCompleteValue, watchDragAndDropTasks } from './Todos/';
 import { watchGetFromLocalStorage } from './LocalStorage/'
 
 
@@ -11,6 +11,7 @@ export default function* rootSaga() {
     watchAddTask(),
     watchGetFromLocalStorage(),
     watchDeleteTask(),
-    watchtChangeCompleteValue()
+    watchtChangeCompleteValue(),
+    watchDragAndDropTasks()
   ])
 };

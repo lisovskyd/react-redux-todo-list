@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Task from '../Task/';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { onDragEnd } from '../../../actions/';
+import { watchForDragEnd } from '../../../actions/';
 
 class List extends Component {
 
@@ -24,7 +24,7 @@ class List extends Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.props.onDragEnd}>
+      <DragDropContext onDragEnd={this.props.watchForDragEnd}>
         <div className="list-wrapper">
           <Droppable 
               droppableId="test" 
@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  onDragEnd
+  watchForDragEnd
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
