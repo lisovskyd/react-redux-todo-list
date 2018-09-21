@@ -6,7 +6,7 @@ const initialState = {
   todos: []
 };
 
-export default function TodoListReducer(state = initialState, action) {
+export default function todoListReducer(state = initialState, action) {
   switch (action.type) {
 
     case tasksType.ON_DRAG_END:

@@ -4,7 +4,7 @@ import { setTasksFromLocalStorageToStore } from '../../actions/';
 import * as tasksType  from '../../variables/actionTypes';
 
 export function* addToLocalStorage() {
-  const getState = state => state;
+  const getState = state => state.todoListReducer;
   const store = yield select(getState);
   localStorage.setItem('Tasks', JSON.stringify(store));
 }

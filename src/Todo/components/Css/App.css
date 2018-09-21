@@ -2,6 +2,27 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: #46adc7;
+}
+
+button {
+    background-color: #fff;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 3px 10px;
+}
+
+button:hover {
+    color: #46adc7;
+    border-color: #46adc7;
+}
+
 .app {
     position: relative;
     display: inline-block;
@@ -12,7 +33,8 @@
     padding: 15px;
     top: 50px;   
     left: 50%;
-    transform: translate(-50%, 0);    
+    transform: translate(-50%, 0);
+    border-radius: 20px;    
 }
 
 .bookmarks-wrapper {
@@ -152,5 +174,31 @@
     justify-content: space-between;
 }
 
-/* TEST */
+/* authentication */
 
+.registration-form__fields {
+    margin-bottom: 20px;
+}
+
+.registration-form__fields .inputs {
+    padding: 2px 5px;
+}
+
+.registration-form__fields label {
+    display: inline-block;
+    min-width: 26%;
+    margin-right: 5px;
+}
+
+.registration-form__fields:first-child {
+    margin-top: 30px;
+}
+
+.registration-form__title {
+    text-align: center;
+}
+
+.auth-form-btn {
+    float: right;
+    cursor: pointer;
+}

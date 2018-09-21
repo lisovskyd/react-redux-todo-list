@@ -13,7 +13,7 @@ export function* watchAddTask() {
 function* addTaskSagas() {
   const getState = state => state;
   const store = yield select(getState);
-  if (!store.inputValue) return;
+  if (!store.todoListReducer.inputValue) return;
   yield put(createTask())
   yield setTodosToLocalStorage('Tasks', store);
 }
@@ -35,7 +35,7 @@ export function* dragAndDropTasks({payload}) {
   if (!payload.destination) {
     return;
   }
-  const getState = state => state.todos;
+  const getState = state => state.todoListReducer.todos;
   const store = yield select(getState);
 
   const reorder = (list, startIndex, endIndex) => {

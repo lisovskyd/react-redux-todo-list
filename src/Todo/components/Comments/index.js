@@ -7,9 +7,6 @@ const showLi = (elem, index) => <li key={index}>{elem}</li>;
 
 
 class Comments extends Component {
-
-  // getComments = () => console.log(this.props.getComments);
-  // doesn't work
   
   render() {
     return (
@@ -30,7 +27,7 @@ class Comments extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    store: state.comments
+    store: state.todoListReducer.comments
   })
 }
 

@@ -89,9 +89,9 @@ class List extends Component {
 };
 
 const mapStateToProps = (state) => {
-  return ({
-    store: state.todos
-  })
+  return ({    
+    store: state.todoListReducer.todos
+  })  
 };
 
 const mapDispatchToProps = {

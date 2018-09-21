@@ -37,9 +37,10 @@ const mapDispatchToProps = {
   changeValue
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ todoListReducer }) => {
+  console.log(todoListReducer)
   return ({
-    inputValue: state.inputValue
+    inputValue: todoListReducer.inputValue
   })
 };
 

@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import Form from '../Form/';
 import Comments from '../Comments/';
 import { getTasksFromLocalStorage } from '../../../actions/';
+import userSignup from '../UserAuthentication/userSignup';
+import userSignin from '../UserAuthentication/userSignin';
 
 const history = createBrowserHistory();
 
@@ -24,17 +26,20 @@ class Main extends Component {
         <div className="app">
           <ul className="bookmarks-wrapper">
             <li className="bookmarks">
-              <Link to='/'>Todo Application</Link>
+              <Link to='/'>Todo list</Link>
             </li>
             <li className="bookmarks">
-              <Link to='/Comments'>Application comments</Link>
+              <Link to='/Comments'>Comments</Link>
             </li>
             <li className="bookmarks">
-              <Link to='/Test'>Test</Link>
+              <Link to='/signup'>Signup</Link>/
+              <Link to='/signin'>Signin</Link>
             </li>
-          </ul>
+          </ul>          
           <Route exact path='/' component={Form} />
           <Route exact path='/Comments' component={Comments} />
+          <Route exact path='/signup' component={userSignup}/>
+          <Route exact path='/signin' component={userSignin}/>
         </div>  
       </Router>   
     )
