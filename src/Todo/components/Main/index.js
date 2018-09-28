@@ -5,23 +5,30 @@ import { connect } from 'react-redux';
 
 import Form from '../Form/';
 import Comments from '../Comments/';
-import { getTasksFromLocalStorage } from '../../../actions/';
+import { getTasksFromLocalStorage, watchForAuthRequestAction, logoutUser } from '../../../actions/';
 import userSignup from '../UserAuthentication/userSignup';
 import userSignin from '../UserAuthentication/userSignin';
+import { PrivateRoute } from '../PrivateRoute/';
 
 const history = createBrowserHistory();
 
 class Main extends Component {
-  
+
   componentDidMount = () => {
-    if(localStorage.getItem(`Tasks`) !== null) {
-      this.props.getTasksFromLocalStorage()
-    };    
+    if (localStorage.getItem(`Tasks`) !== null) {
+      this.props.getTasksFromLocalStorage();
+    };
+    if (localStorage.getItem(`token`) === null) {
+      console.log('token == null')
+    } else if (localStorage.getItem(`token`) === undefined) {
+      console.log('token == undefined')
+    } else {
+      this.props.watchForAuthRequestAction();
+    };     
   };
 
   render() {
-
-    return (   
+    return (  
       <Router history={history}>
         <div className="app">
           <ul className="bookmarks-wrapper">
@@ -32,22 +39,33 @@ class Main extends Component {
               <Link to='/Comments'>Comments</Link>
             </li>
             <li className="bookmarks">
-              <Link to='/signup'>Signup</Link>/
-              <Link to='/signin'>Signin</Link>
+              <Link to='/signup'>SignUp</Link>/
+              <Link to='/signin'>SignIn</Link>
+            </li>
+            <li className="bookmarks">
+              <Link to='/signin' onClick={this.props.logoutUser}>LogOut</Link>
             </li>
           </ul>          
-          <Route exact path='/' component={Form} />
+          <PrivateRoute exact path="/" component={Form} isAuthenticated={this.props.isAuthenticated} />
           <Route exact path='/Comments' component={Comments} />
-          <Route exact path='/signup' component={userSignup}/>
-          <Route exact path='/signin' component={userSignin}/>
+          <Route exact path='/signup' component={userSignup} />
+          <Route exact path='/signin' component={userSignin} />
         </div>  
-      </Router>   
+      </Router>         
     )
   };
 }
 
 const mapDispatchToProps = {
-  getTasksFromLocalStorage
+  getTasksFromLocalStorage,
+  watchForAuthRequestAction,
+  logoutUser
 };
 
-export default connect(null, mapDispatchToProps)(Main);
+const mapStateToProps = (state) => {
+  return ({    
+    isAuthenticated: state.todoListReducer.isAuthenticated
+  })  
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

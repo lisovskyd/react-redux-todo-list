@@ -31,7 +31,7 @@ export function* watchDragAndDropTasks() {
   yield takeLatest(tasksType.WATCH_FOR_DRAG_END, addToLocalStorage);
 }
 
-export function* dragAndDropTasks({payload}) {
+export function* dragAndDropTasks({ payload }) {
   if (!payload.destination) {
     return;
   }

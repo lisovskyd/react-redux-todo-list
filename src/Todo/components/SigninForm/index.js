@@ -6,7 +6,7 @@ class ContactForm extends Component {
   render() {
   const { handleSubmit } = this.props;
     return (
-      <form className="registration-form" onSubmit={handleSubmit}>
+      <form className="registration-form" onSubmit={ handleSubmit }>
         <h2 className="registration-form__title">Signin</h2>
         <div className="registration-form__fields">
           <label htmlFor="login">User name:</label>

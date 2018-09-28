@@ -1,13 +1,26 @@
 import * as tasksType  from '../variables/actionTypes';
 
-const initialState = {
+const initialState = {    
+  todos: [],
   comments: [],
   inputValue: '',
-  todos: []
+  isAuthenticated: false
 };
 
 export default function todoListReducer(state = initialState, action) {
   switch (action.type) {
+
+    case tasksType.LOGOUT_USER:
+      return {
+        ...state,
+        isAuthenticated: action.isAuthenticated
+      }
+
+    case tasksType.IS_VALID_TOKEN:
+      return {
+        ...state,
+        isAuthenticated: action.isValidToken
+      };
 
     case tasksType.ON_DRAG_END:
       let initNewState = { ...state, todos: [ ...action.updatedTodos ] };

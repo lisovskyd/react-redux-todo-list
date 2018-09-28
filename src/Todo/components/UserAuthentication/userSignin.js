@@ -1,27 +1,18 @@
 import React from 'react';
-import SigninForm from '../SigninForm';
+import { connect } from 'react-redux';
 
-export default class ContactPage extends React.Component {
-  postSigninData = (data) => {
-    const dataBody = {
-      username: data.login,
-      password: data.password 
-    }
-    fetch('http://localhost:3001/signin', {
-      method: "POST",      
-      body: JSON.stringify(dataBody),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    })
-    .then(response => response.json())
-    .catch(error => {
-      console.log(error)
-    });
-  };
+import SigninForm from '../SigninForm';
+import { signinUser } from '../../../actions/';
+
+class ContactPage extends React.Component {
 
   render() {
-    return <SigninForm onSubmit={this.postSigninData} />
+    return <SigninForm onSubmit={(data) => this.props.signinUser({data, history: this.props.history})} />
   };
 };
+
+const mapDispatchToProps = {
+  signinUser
+};
+
+export default connect(null, mapDispatchToProps)(ContactPage);

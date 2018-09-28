@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 
 import watchLoadComments from './Comments/';
 import { watchAddTask, watchDeleteTask, watchtChangeCompleteValue, watchDragAndDropTasks } from './Todos/';
+import { watchIsValidToken, watchSignupUser, watchSigninUser } from './Auth/'
 import { watchGetFromLocalStorage } from './LocalStorage/'
 
 
@@ -12,6 +13,9 @@ export default function* rootSaga() {
     watchGetFromLocalStorage(),
     watchDeleteTask(),
     watchtChangeCompleteValue(),
-    watchDragAndDropTasks()
+    watchDragAndDropTasks(),
+    watchIsValidToken(),
+    watchSignupUser(),
+    watchSigninUser()
   ])
 };

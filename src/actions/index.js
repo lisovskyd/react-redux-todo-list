@@ -1,15 +1,50 @@
 import * as tasksType  from '../variables/actionTypes';
 import uuid from 'uuid';
 
+export const signinUser = payload => {
+  return ({
+    type: tasksType.SIGNIN_USER,
+    payload
+  })
+}
+
+export const signupUser = payload => {
+  return ({
+    type: tasksType.SIGNUP_USER,
+    payload
+  })
+}
+
+export const logoutUser = () => {
+  localStorage.removeItem('token');
+  return ({
+    type: tasksType.LOGOUT_USER,
+    isAuthenticated: false
+  })
+}
+
+export const watchForAuthRequestAction = () => {
+  return ({
+    type: tasksType.WATCH_FOR_AUTH_REQUEST_ACTION
+  })
+}
+
+export const authRequest = (isValidToken) => {  
+  return ({
+    type: tasksType.IS_VALID_TOKEN,
+    isValidToken
+  })
+};
+
 export const watchForDragEnd = (payload) => {
-  return({
+  return ({
     type: tasksType.WATCH_FOR_DRAG_END,
     payload
   })
 };
 
 export const onDragEnd = (todos) => {
-  return({
+  return ({
     type: tasksType.ON_DRAG_END,
     updatedTodos: todos
   })

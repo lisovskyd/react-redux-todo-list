@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Main from '../Main/';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return ( 
       <Main />
