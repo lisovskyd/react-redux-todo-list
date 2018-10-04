@@ -26,8 +26,8 @@ export default function todoListReducer(state = initialState, action) {
       let initNewState = { ...state, todos: [ ...action.updatedTodos ] };
       return initNewState;
 
-    case tasksType.SET_TASKS_FROM_LOCALSTORAGE_TO_STORE: 
-      return { ...state, ...action.payload }; 
+    case tasksType.SET_TASKS_FROM_DATABASE_TO_STORE: 
+      return { ...state, todos: [ ...action.payload ] }; 
 
     case tasksType.ADD_COMMENT:
       return { ...state , comments: [ ...state.comments, action.payload.body] }
@@ -35,10 +35,10 @@ export default function todoListReducer(state = initialState, action) {
     case tasksType.CREATE_TASK:
       const newTodo = {
         id: action.id,
-        value: state.inputValue,
+        value: action.value,
         taskStatus: action.taskStatus
       }      
-      return { ...state, todos: [ newTodo, ...state.todos ], inputValue: '' };
+      return { ...state, todos: [ ...state.todos, newTodo ], inputValue: '' };
 
     case tasksType.CHANGE_VALUE:
       return {...state, 
@@ -48,7 +48,7 @@ export default function todoListReducer(state = initialState, action) {
     case tasksType.DELETE_TASK:
       let newState = {...state};
       newState.todos = state.todos.filter((item) => {
-        return item.id !== action.todosId       
+        return item.id !== action.todoId       
       });
       return newState;
 

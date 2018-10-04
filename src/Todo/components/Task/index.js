@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { deleteTask, changeCompleteValue } from '../../../actions/';
+import { requestDeleteTask, requestChangeCompleteValue } from '../../../actions/';
 
 class Task extends Component {
   
@@ -12,9 +12,9 @@ class Task extends Component {
     ...draggableStyle
   });
   
-  deleteTask = () => this.props.deleteTask(this.props.todo.id);
+  requestDeleteTask = () => this.props.requestDeleteTask(this.props.todo.id);
 
-  changeCompleteValue = (event) => this.props.changeCompleteValue(this.props.todo.id, event);
+  changeCompleteValue = (event) => this.props.requestChangeCompleteValue(this.props.todo.id, event);
 
   render() {
     return (
@@ -29,7 +29,7 @@ class Task extends Component {
               provided.draggableProps.style)}
           >
             <span className={this.props.todo.done ? 'task-wrapper task-decoration' : 'task-wrapper'}>
-              <button className="delete-task" onClick={ this.deleteTask }></button>
+              <button className="delete-task" onClick={ this.requestDeleteTask }></button>
               {this.props.todo.value}
             </span>
             <select value={this.props.todo.taskStatus} className="todo-status" onChange={ this.changeCompleteValue }>
@@ -46,8 +46,8 @@ class Task extends Component {
 };
 
 const mapDispatchToProps = {
-  deleteTask, 
-  changeCompleteValue
+  requestDeleteTask, 
+  requestChangeCompleteValue
 };
 
 export default connect(null, mapDispatchToProps)(Task);

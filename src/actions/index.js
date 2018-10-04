@@ -1,5 +1,4 @@
 import * as tasksType  from '../variables/actionTypes';
-import uuid from 'uuid';
 
 export const signinUser = payload => {
   return ({
@@ -29,14 +28,14 @@ export const watchForAuthRequestAction = () => {
   })
 }
 
-export const authRequest = (isValidToken) => {  
+export const authRequest = isValidToken => {  
   return ({
     type: tasksType.IS_VALID_TOKEN,
     isValidToken
   })
 };
 
-export const watchForDragEnd = (payload) => {
+export const watchForDragEnd = payload => {
   return ({
     type: tasksType.WATCH_FOR_DRAG_END,
     payload
@@ -50,20 +49,14 @@ export const onDragEnd = (todos) => {
   })
 }
 
-export const getTasksFromLocalStorage = () => {
+export const setTasksDatabaseToStore = payload => {
   return ({
-    type: tasksType.GET_TASKS_FROM_LOCALSTORAGE
-  })
-}
-
-export const setTasksFromLocalStorageToStore = (payload) => {
-  return ({
-    type: tasksType.SET_TASKS_FROM_LOCALSTORAGE_TO_STORE,
+    type: tasksType.SET_TASKS_FROM_DATABASE_TO_STORE,
     payload    
   })
 };
 
-export const getComments = (payload) => {
+export const getComments = payload => {
   return ({
     type: tasksType.ADD_COMMENT,
     payload
@@ -88,33 +81,48 @@ export const requestCreateTask = () => {
   })
 }
 
-export const createTask = () => {
+export const createTask = (id, value, taskStatus) => {
   return ({
     type: tasksType.CREATE_TASK,    
-    id: uuid(),
-    taskStatus: 'todo'      
+    id,
+    value,
+    taskStatus     
   })
 };
 
-export const changeValue = (inputValue) => {
+export const changeValue = inputValue => {
   return ({
     type: tasksType.CHANGE_VALUE,
     inputValue
   })
 };
 
-export const deleteTask = (todosId) => {
+export const requestDeleteTask = todoId => {
   return ({
-    type: tasksType.DELETE_TASK,
-    todosId: todosId
+    type: tasksType.REQUEST_DELETE_TASK,
+    todoId
   })
 };
 
-export const changeCompleteValue = (todosId, event) => {
-  const target = event.target;
+export const deleteTask = todoId => {
+  return ({
+    type: tasksType.DELETE_TASK,
+    todoId
+  })
+}
+
+export const requestChangeCompleteValue = (todoId, event) => {
+  return ({
+    type: tasksType.REQUEST_CHANGE_COMPLETE_VALUE,
+    todoId,
+    event
+  })
+}
+
+export const changeCompleteValue = (todoId, value) => {
   return ({
     type: tasksType.CHANGE_COMPLETE_VALUE,
-    id: todosId,
-    value: target.value
+    id: todoId,
+    value
   });
 };

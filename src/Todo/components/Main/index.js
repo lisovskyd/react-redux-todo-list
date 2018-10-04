@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Form from '../Form/';
 import Comments from '../Comments/';
-import { getTasksFromLocalStorage, watchForAuthRequestAction, logoutUser } from '../../../actions/';
+import { watchForAuthRequestAction, logoutUser } from '../../../actions/';
 import userSignup from '../UserAuthentication/userSignup';
 import userSignin from '../UserAuthentication/userSignin';
 import { PrivateRoute } from '../PrivateRoute/';
@@ -15,14 +15,12 @@ const history = createBrowserHistory();
 class Main extends Component {
 
   componentDidMount = () => {
-    if (localStorage.getItem(`Tasks`) !== null) {
-      this.props.getTasksFromLocalStorage();
-    };
     if (localStorage.getItem(`token`) === null) {
       console.log('token == null')
     } else if (localStorage.getItem(`token`) === undefined) {
       console.log('token == undefined')
     } else {
+      console.log('here now')
       this.props.watchForAuthRequestAction();
     };     
   };
@@ -57,7 +55,6 @@ class Main extends Component {
 }
 
 const mapDispatchToProps = {
-  getTasksFromLocalStorage,
   watchForAuthRequestAction,
   logoutUser
 };

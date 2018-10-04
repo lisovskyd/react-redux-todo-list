@@ -2,9 +2,10 @@
 export const WATCH_FOR_DRAG_END = 'WATCH_FOR_DRAG_END';
 export const ON_DRAG_END = 'ON_DRAG_END';
 
-// variables of interaction store & LocalStorage 
-export const GET_TASKS_FROM_LOCALSTORAGE = 'GET_TASKS_FROM_LOCALSTORAGE';
-export const SET_TASKS_FROM_LOCALSTORAGE_TO_STORE = 'SET_TASKS_FROM_LOCALSTORAGE_TO_STORE';
+// variables of interaction store & database
+export const WATCH_SET_TASKS_FROM_DATABASE_TO_STORE = 'WATCH_SET_TASKS_FROM_DATABASE_TO_STORE';
+export const SET_TASKS_FROM_DATABASE_TO_STORE = 'SET_TASKS_FROM_DATABASE_TO_STORE';
+export const ADD_TASK_TO_DATA_BASE = 'ADD_TASK_TO_DATA_BASE';
 
 // Apps comments variables
 export const REQUEST_COMMENT = 'REQUEST_COMMENT';
@@ -15,7 +16,9 @@ export const STOP_ADD_COMMENTS = 'STOP_ADD_COMMENTS';
 export const CREATE_TASK = 'CREATE_TASK';
 export const REQUEST_CREATE_TASK = 'REQUEST_CREATE_TASK';
 export const CHANGE_VALUE = 'CHANGE_VALUE'; 
+export const REQUEST_DELETE_TASK = 'REQUEST_DELETE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
+export const REQUEST_CHANGE_COMPLETE_VALUE = 'REQUEST_CHANGE_COMPLETE_VALUE';
 export const CHANGE_COMPLETE_VALUE = 'CHANGE_COMPLETE_VALUE';
 
 // Authenticate functionality variables
