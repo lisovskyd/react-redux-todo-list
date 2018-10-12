@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { commentRequest, stopAddComments } from '../../../actions/';
@@ -6,24 +6,19 @@ import { commentRequest, stopAddComments } from '../../../actions/';
 const showLi = (elem, index) => <li key={index}>{elem}</li>;
 
 
-class Comments extends Component {
-  
-  render() {
-    return (
-      <div className="comments-wrapper">
-        <span className="comments-title">Comments</span>
-        <ul className="comments-list">          
-          {this.props.store.map( showLi )}          
-        </ul>       
-        <div className="buttons-wrapper">        
-          <button className="" onClick={ this.props.commentRequest }>Start</button>
-          <button className="" onClick={ this.props.stopAddComments }>Stop</button>
-          <button className="">Clear</button>
-        </div>
-      </div>
-    )
-  }
-}
+const Comments = ({ store, commentRequest, stopAddComments}) => (
+  <div className="comments-wrapper">
+    <span className="comments-title">Comments</span>
+    <ul className="comments-list">          
+      {store.map( showLi )}          
+    </ul>       
+    <div className="buttons-wrapper">        
+      <button onClick={ commentRequest }>Start</button>
+      <button onClick={ stopAddComments }>Stop</button>
+      <button>Clear</button>
+    </div>
+  </div>
+)
 
 const mapStateToProps = (state) => {
   return ({

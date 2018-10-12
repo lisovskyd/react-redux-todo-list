@@ -2,6 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 import { authRequest, setTasksDatabaseToStore } from '../../actions/';
 import * as tasksType  from '../../variables/actionTypes';
+import { todoAuthToken } from '../../variables/common';
 
 export function* watchSigninUser() {
   yield takeLatest(tasksType.SIGNIN_USER, signinUserSaga);
@@ -22,7 +23,7 @@ function* signinUserSaga({payload: { data, history }}) {
       }
     })
     const signinSuccess = yield signinRequest.json();
-    yield localStorage.setItem('token', JSON.stringify(signinSuccess.token));
+    yield localStorage.setItem(todoAuthToken, JSON.stringify(signinSuccess.token));
     // yield window.location.reload() // its not right way 
     yield history.push('/');
   } catch(err) {
@@ -62,7 +63,7 @@ export function* watchIsValidToken() {
 
 function* isValidToken() {
   try {    
-    const authToken = yield JSON.parse(localStorage.getItem('token'));    
+    const authToken = yield JSON.parse(localStorage.getItem(todoAuthToken));    
     const validateTokenRequest = yield fetch('http://localhost:3001/isAuthorized', {
       method: "POST",
       headers: {
@@ -77,7 +78,7 @@ function* isValidToken() {
       yield put(setTasksDatabaseToStore(validateToken.todos))
     }    
   } catch(err) {
-    localStorage.removeItem('token'); 
+    localStorage.removeItem(todoAuthToken); 
     console.log(err)
   }
 }

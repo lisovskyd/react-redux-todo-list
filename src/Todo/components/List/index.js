@@ -5,13 +5,13 @@ import Task from '../Task/';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { watchForDragEnd } from '../../../actions/';
 
-class List extends Component {
+const getListStyle = () => ({
+  padding: 8,
+  width: 250,
+});
 
-  getListStyle = () => ({
-    padding: 8,
-    width: 250,
-  });
-
+class List extends Component {  
+  
   renderTodo = (complitedValue) => this.props.store.map((todo, index) => {
     return todo.taskStatus === `${complitedValue}` ? (
       <Task 
@@ -32,7 +32,7 @@ class List extends Component {
             {(provided, snapshot) => (
               <div className="list"
                 ref={provided.innerRef}                
-                style={this.getListStyle()}
+                style={getListStyle()}
               >
                 <span className="list-title">Test</span>
                 { this.renderTodo('test') }
@@ -46,7 +46,7 @@ class List extends Component {
             {(provided, snapshot) => (
               <div className="list"
                 ref={provided.innerRef}                
-                style={this.getListStyle()}
+                style={getListStyle()}
               >
                 <span className="list-title">Todo</span>
                 { this.renderTodo('todo') }
@@ -60,7 +60,7 @@ class List extends Component {
             {(provided, snapshot) => (
               <div className="list"
                 ref={provided.innerRef}                
-                style={this.getListStyle()}
+                style={getListStyle()}
               >
                 <span className="list-title">In progress</span> 
                 { this.renderTodo('in progress') }
@@ -74,7 +74,7 @@ class List extends Component {
             {(provided, snapshot) => (
               <div className="list"
                 ref={provided.innerRef}                
-                style={this.getListStyle()}
+                style={getListStyle()}
               >
                 <span className="list-title">Done</span>  
                 { this.renderTodo('done') }

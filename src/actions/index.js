@@ -1,4 +1,5 @@
 import * as tasksType  from '../variables/actionTypes';
+import { todoAuthToken } from '../variables/common';
 
 export const signinUser = payload => {
   return ({
@@ -15,10 +16,12 @@ export const signupUser = payload => {
 }
 
 export const logoutUser = () => {
-  localStorage.removeItem('token');
+  localStorage.removeItem(todoAuthToken);
   return ({
     type: tasksType.LOGOUT_USER,
-    isAuthenticated: false
+    payload: {
+      isAuthenticated: false
+    }
   })
 }
 
@@ -31,7 +34,9 @@ export const watchForAuthRequestAction = () => {
 export const authRequest = isValidToken => {  
   return ({
     type: tasksType.IS_VALID_TOKEN,
-    isValidToken
+    payload: {
+      isValidToken
+    }    
   })
 };
 
@@ -42,10 +47,19 @@ export const watchForDragEnd = payload => {
   })
 };
 
+// const helpMe = actionType => payload => ({
+//     type: actionType,
+//     payload
+// });
+
+// const setTasksDatabaseToStore = helpMe( tasksType.SET_TASKS_FROM_DATABASE_TO_STORE );
+
 export const onDragEnd = (todos) => {
   return ({
     type: tasksType.ON_DRAG_END,
-    updatedTodos: todos
+    payload: {
+      updatedTodos: todos
+    }    
   })
 }
 
@@ -83,46 +97,58 @@ export const requestCreateTask = () => {
 
 export const createTask = (id, value, taskStatus) => {
   return ({
-    type: tasksType.CREATE_TASK,    
-    id,
-    value,
-    taskStatus     
+    type: tasksType.CREATE_TASK,
+    payload: {
+      id,
+      value,
+      taskStatus   
+    }      
   })
 };
 
 export const changeValue = inputValue => {
   return ({
     type: tasksType.CHANGE_VALUE,
-    inputValue
+    payload: {
+      inputValue
+    }    
   })
 };
 
 export const requestDeleteTask = todoId => {
   return ({
     type: tasksType.REQUEST_DELETE_TASK,
-    todoId
+    payload: {
+      todoId
+    }
   })
 };
 
 export const deleteTask = todoId => {
   return ({
     type: tasksType.DELETE_TASK,
-    todoId
+    payload: {
+      todoId
+    }
   })
 }
 
 export const requestChangeCompleteValue = (todoId, event) => {
   return ({
     type: tasksType.REQUEST_CHANGE_COMPLETE_VALUE,
-    todoId,
-    event
+    payload: {
+      todoId,
+      event
+    }
   })
 }
 
 export const changeCompleteValue = (todoId, value) => {
   return ({
     type: tasksType.CHANGE_COMPLETE_VALUE,
-    id: todoId,
-    value
+    payload: {
+      id: todoId,
+      value 
+    }    
   });
 };

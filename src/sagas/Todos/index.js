@@ -3,17 +3,18 @@ import uuid from 'uuid';
 
 import { createTask, onDragEnd, deleteTask, changeCompleteValue } from '../../actions/';
 import * as tasksType  from '../../variables/actionTypes';
+import { todoAuthToken } from '../../variables/common';
 
 //delete todo functionality
 export function* watchDeleteTask() {
   yield takeLatest(tasksType.REQUEST_DELETE_TASK, deleteTaskSaga);
 }
 
-function* deleteTaskSaga({ todoId }) {
+function* deleteTaskSaga({ payload }) {
   try {
-  const authToken = yield JSON.parse(localStorage.getItem('token'));
+  const authToken = yield JSON.parse(localStorage.getItem(todoAuthToken));
   const dataBody = {
-    todoId
+    todoId: payload.todoId
   }
   const getTodosRequest = yield fetch('http://localhost:3001/delete', {
     method: "POST",      
@@ -36,12 +37,12 @@ export function* watchtChangeCompleteValue() {
   yield takeLatest(tasksType.REQUEST_CHANGE_COMPLETE_VALUE, changeCompleteValueinDb);
 }
 
-export function* changeCompleteValueinDb({ todoId, event }) {
+export function* changeCompleteValueinDb({ payload }) {
   try {
-    const authToken = yield JSON.parse(localStorage.getItem('token'));
+    const authToken = yield JSON.parse(localStorage.getItem(todoAuthToken));
     const dataBody = {
-      todoId,
-      value: event.target.value
+      todoId: payload.todoId,
+      value: payload.event.target.value
     }
     const changeCompleteValueRequest = yield fetch('http://localhost:3001/change-complete-value', {
       method: "POST",      
@@ -69,7 +70,7 @@ export function* dragAndDropTasks({ payload }) {
   if (!payload.destination) {
     return;
   }
-  const authToken = yield JSON.parse(localStorage.getItem('token'));
+  const authToken = yield JSON.parse(localStorage.getItem(todoAuthToken));
   const dataBody = {
     todoId: payload.draggableId,
     value: payload.destination.droppableId
@@ -128,7 +129,7 @@ export function* addTaskToDataBase() {
       taskStatus: 'todo',
       value: store.inputValue
     }
-    const authToken = yield JSON.parse(localStorage.getItem('token'));
+    const authToken = yield JSON.parse(localStorage.getItem(todoAuthToken));
     const addTaskRequest = yield fetch('http://localhost:3001/todos', {
       method: "POST",      
       headers: {
